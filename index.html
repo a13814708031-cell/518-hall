@@ -39,7 +39,6 @@
         repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.02) 40px, rgba(255, 255, 255, 0.02) 41px);
     }
 
-    /* ===== 页面主标题 ===== */
     .page-title {
       text-align: center;
       font-size: 36px;
@@ -53,7 +52,6 @@
       position: relative;
     }
 
-    /* ===== 核心展柜区域 ===== */
     .showcase-container {
       flex: 1;
       display: flex;
@@ -66,8 +64,7 @@
     .showcase-frame {
       position: relative;
       width: 100%;
-      /* 🌟 电脑端限制最大宽度，不让它无限拉长 */
-      max-width: 1000px; 
+      max-width: 1000px;
       height: 100%;
       background: #0d1117;
       border: 1px solid #333;
@@ -91,10 +88,20 @@
       filter: blur(4px);
     }
 
-    /* ===== 成就网格墙 ===== */
+    .page-view {
+      display: none;
+      width: 100%;
+      height: 100%;
+      min-height: 0;
+      flex-direction: column;
+    }
+
+    .page-view.active {
+      display: flex;
+    }
+
     .grid-wall {
       display: grid;
-      /* 🌟 电脑端默认一排 6 个 */
       grid-template-columns: repeat(6, 1fr);
       gap: 16px;
       width: 100%;
@@ -110,7 +117,6 @@
       display: none;
     }
 
-    /* ===== 单个展位（成就格子） ===== */
     .slot {
       position: relative;
       aspect-ratio: 1 / 1;
@@ -126,7 +132,6 @@
       overflow: hidden;
     }
 
-    /* 已解锁的展位 — 金色底光 */
     .slot.unlocked::before {
       content: '';
       position: absolute;
@@ -139,7 +144,6 @@
       pointer-events: none;
     }
 
-    /* 高光折射 */
     .slot::after {
       content: '';
       position: absolute;
@@ -170,7 +174,6 @@
       border-color: #f0e2c0;
     }
 
-    /* 未解锁展位 — 灰暗神秘 */
     .slot.locked {
       background: #14171e;
       border-color: #2a2e39;
@@ -190,7 +193,115 @@
       font-weight: bold;
     }
 
-    /* ===== 底部导航 HUD ===== */
+    .sponsor-wall {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      padding: 8px 4px 20px 4px;
+      scrollbar-width: none;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .sponsor-wall::-webkit-scrollbar {
+      display: none;
+    }
+
+    .sponsor-section-title {
+      font-size: 14px;
+      letter-spacing: 3px;
+      color: var(--gold);
+      opacity: 0.85;
+      padding-left: 4px;
+      border-left: 3px solid var(--gold);
+      line-height: 1.2;
+    }
+
+    .sponsor-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .sponsor-card {
+      position: relative;
+      background: #0f131a;
+      border: 1px solid #2a2e39;
+      border-radius: 10px;
+      padding: 20px 22px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: default;
+    }
+
+    .sponsor-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(247, 214, 141, 0.5), transparent);
+    }
+
+    .sponsor-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(247, 214, 141, 0.35);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6), 0 0 15px rgba(247, 214, 141, 0.08);
+    }
+
+    .sponsor-logo {
+      width: 56px;
+      height: 56px;
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 30px;
+      background: radial-gradient(circle at 50% 30%, rgba(247, 214, 141, 0.18), transparent 70%);
+      border: 1px solid rgba(247, 214, 141, 0.2);
+      border-radius: 10px;
+      line-height: 1;
+    }
+
+    .sponsor-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .sponsor-name {
+      font-size: 17px;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+      text-shadow: 0 0 12px rgba(247, 214, 141, 0.25);
+      word-break: break-word;
+    }
+
+    .sponsor-tag {
+      display: inline-block;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      border: 1px solid #2f3542;
+      background: rgba(255, 255, 255, 0.03);
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .sponsor-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 6px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
     .hud-bottom {
       position: fixed;
       bottom: 0;
@@ -218,6 +329,19 @@
       align-items: center;
       font-size: 20px;
       border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .nav-btn:hover {
+      background: rgba(40, 46, 56, 0.9);
+      border-color: rgba(247, 214, 141, 0.4);
+      color: var(--gold);
+    }
+
+    .nav-btn.disabled {
+      opacity: 0.25;
+      pointer-events: none;
     }
 
     .nav-title {
@@ -229,9 +353,10 @@
       letter-spacing: 2px;
       color: var(--text-main);
       border-radius: 6px;
+      min-width: 200px;
+      text-align: center;
     }
 
-    /* ===== 详情弹窗 ===== */
     .modal {
       position: fixed;
       inset: 0;
@@ -355,6 +480,12 @@
       word-break: break-word;
     }
 
+    .info-item b#mWinner {
+      color: var(--gold);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(247, 214, 141, 0.3);
+    }
+
     .modal-close {
       position: absolute;
       top: 12px;
@@ -373,7 +504,6 @@
       font-size: 14px;
     }
 
-    /* ===== 手机端专属排版优化 ===== */
     @media (max-width: 768px) {
       .page-title {
         font-size: 26px;
@@ -388,7 +518,6 @@
         padding: 20px 12px 12px 12px;
       }
       .grid-wall {
-        /* 手机上一排 3 个 */
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
       }
@@ -416,29 +545,45 @@
       .modal-info-grid {
         gap: 10px;
       }
+      .sponsor-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .sponsor-card {
+        padding: 16px 16px;
+      }
+      .nav-title {
+        padding: 10px 20px;
+        min-width: 150px;
+        font-size: 14px;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- ====== 顶部大标题 ====== -->
   <h1 class="page-title">518娱乐赛名人堂</h1>
 
-  <!-- ====== 主展柜区域 ====== -->
   <main class="showcase-container">
     <div class="showcase-frame">
-      <div class="grid-wall" id="gridWall"></div>
+
+      <div class="page-view active" id="pageHonor">
+        <div class="grid-wall" id="gridWall"></div>
+      </div>
+
+      <div class="page-view" id="pageSponsor">
+        <div class="sponsor-wall" id="sponsorWall"></div>
+      </div>
+
     </div>
   </main>
 
-  <!-- ====== 底部装饰性导航 HUD ====== -->
   <footer class="hud-bottom">
-    <div class="nav-btn" aria-hidden="true">&lt;</div>
-    <div class="nav-title">荣誉殿堂</div>
-    <div class="nav-btn" aria-hidden="true">&gt;</div>
+    <div class="nav-btn" id="btnPrev" aria-label="上一页">&lt;</div>
+    <div class="nav-title" id="navTitle">荣誉殿堂</div>
+    <div class="nav-btn" id="btnNext" aria-label="下一页">&gt;</div>
   </footer>
 
-  <!-- ====== 成就详情弹窗 ====== -->
   <div class="modal" id="modal">
     <div class="modal-box">
       <div class="modal-close" id="btnClose">✕</div>
@@ -491,12 +636,12 @@
       {
         id: 3,
         title: "雀魂冠军",
-        category: "虚位以待",
+        category: "后来居上",
         date: "2026-10-28",
-        winner: "虚位以待",
+        winner: "追着光梦游",
         icon: "🀄️",
         unlocked: true,
-        desc: "麻将桌上的巅峰对决，静候王者登顶。"
+        desc: "决赛不软脚，冠军跑不了"
       },
       {
         id: 4,
@@ -508,7 +653,6 @@
         unlocked: true,
         desc: "极限操作与精准击杀的终极试炼，谁将夺魁？"
       },
-      // 未解锁的占位卡片（灰显，不可点击查看详情）
       { id: 5, title: "神秘大奖 C", icon: "📦", unlocked: false },
       { id: 6, title: "神秘大奖 D", icon: "📦", unlocked: false },
       { id: 7, title: "神秘大奖 E", icon: "📦", unlocked: false },
@@ -526,11 +670,79 @@
     ];
 
     // ============================================================
-    // 2. DOM 元素 & 渲染逻辑
+    // 2. 赞助商数据（已修复第 5 个对象缺失的 {）
+    // ============================================================
+    const sponsors = [
+      {
+        name: "白银无敌土拨鼠战神",
+        tag: "bin哥的雀魂粉丝",
+        icon: "🗑️",
+        desc: "为每位参赛选手赞助4.8元，woc，bin！"
+      },
+      {
+        name: "吃兔子的大米",
+        tag: "涨涨涨",
+        icon: "🚀",
+        desc: "希望你的股票一路长红"
+      },
+      {
+        name: "愿归鸿",
+        tag: "一神神了",
+        icon: "☁️",
+        desc: "经常给大家分享爱看的"
+      },
+      {
+        name: "芝士一民",
+        tag: "518的好大哥",
+        icon: "🧀",
+        desc: "518最有实力的LOL玩家"
+      },
+      {
+        name: "黑名单",
+        tag: "未被承认686的前任老公",
+        icon: "🔫",
+        desc: "我不会发言，只会当暖男"
+      },
+    ];
+
+    // ============================================================
+    // 3. DOM 元素
     // ============================================================
     const gridWall = document.getElementById('gridWall');
+    const sponsorWall = document.getElementById('sponsorWall');
     const modal = document.getElementById('modal');
 
+    const pageHonor = document.getElementById('pageHonor');
+    const pageSponsor = document.getElementById('pageSponsor');
+    const navTitle = document.getElementById('navTitle');
+    const btnPrev = document.getElementById('btnPrev');
+    const btnNext = document.getElementById('btnNext');
+
+    // ============================================================
+    // 4. 页面状态
+    // ============================================================
+    const PAGES = [
+      { id: 'honor', title: '荣誉殿堂' },
+      { id: 'sponsor', title: '赞助商名单' }
+    ];
+    let currentPage = 0;
+
+    function switchPage(index) {
+      if (index < 0 || index >= PAGES.length) return;
+      currentPage = index;
+
+      pageHonor.classList.toggle('active', PAGES[index].id === 'honor');
+      pageSponsor.classList.toggle('active', PAGES[index].id === 'sponsor');
+
+      navTitle.textContent = PAGES[index].title;
+
+      btnPrev.classList.toggle('disabled', index === 0);
+      btnNext.classList.toggle('disabled', index === PAGES.length - 1);
+    }
+
+    // ============================================================
+    // 5. 渲染成就墙
+    // ============================================================
     function renderWall() {
       gridWall.innerHTML = achievements.map(item => {
         const isUnlocked = item.unlocked;
@@ -543,7 +755,28 @@
     }
 
     // ============================================================
-    // 3. 点击交互：已解锁 → 弹窗；未解锁 → 抖动
+    // 6. 渲染赞助商列表
+    // ============================================================
+    function renderSponsors() {
+      sponsorWall.innerHTML = `
+        <div class="sponsor-section-title">感谢以下伙伴对518娱乐赛的大力支持</div>
+        <div class="sponsor-grid">
+          ${sponsors.map(s => `
+            <div class="sponsor-card">
+              <div class="sponsor-logo">${s.icon}</div>
+              <div class="sponsor-info">
+                <div class="sponsor-name">${s.name}</div>
+                <span class="sponsor-tag">${s.tag}</span>
+                <div class="sponsor-desc">${s.desc}</div>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    // ============================================================
+    // 7. 点击交互
     // ============================================================
     gridWall.addEventListener('click', (e) => {
       const slot = e.target.closest('.slot');
@@ -564,7 +797,7 @@
     });
 
     // ============================================================
-    // 4. 打开弹窗
+    // 8. 打开弹窗
     // ============================================================
     function openModal(item) {
       document.getElementById('mIcon').textContent = item.icon;
@@ -578,7 +811,7 @@
     }
 
     // ============================================================
-    // 5. 关闭弹窗
+    // 9. 关闭弹窗
     // ============================================================
     document.getElementById('btnClose').addEventListener('click', () => {
       modal.classList.remove('open');
@@ -591,9 +824,17 @@
     });
 
     // ============================================================
-    // 6. 初始化
+    // 10. 导航按钮事件
+    // ============================================================
+    btnPrev.addEventListener('click', () => switchPage(currentPage - 1));
+    btnNext.addEventListener('click', () => switchPage(currentPage + 1));
+
+    // ============================================================
+    // 11. 初始化
     // ============================================================
     renderWall();
+    renderSponsors();
+    switchPage(0);
   </script>
 </body>
 </html>
