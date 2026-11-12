@@ -39,6 +39,7 @@
         repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(255, 255, 255, 0.02) 40px, rgba(255, 255, 255, 0.02) 41px);
     }
 
+    /* ===== 页面主标题 ===== */
     .page-title {
       text-align: center;
       font-size: 36px;
@@ -52,6 +53,7 @@
       position: relative;
     }
 
+    /* ===== 核心展柜区域 ===== */
     .showcase-container {
       flex: 1;
       display: flex;
@@ -88,6 +90,7 @@
       filter: blur(4px);
     }
 
+    /* ===== 页面切换容器 ===== */
     .page-view {
       display: none;
       width: 100%;
@@ -100,6 +103,7 @@
       display: flex;
     }
 
+    /* ===== 成就网格墙 ===== */
     .grid-wall {
       display: grid;
       grid-template-columns: repeat(6, 1fr);
@@ -117,6 +121,7 @@
       display: none;
     }
 
+    /* ===== 单个展位（成就格子） ===== */
     .slot {
       position: relative;
       aspect-ratio: 1 / 1;
@@ -193,6 +198,7 @@
       font-weight: bold;
     }
 
+    /* ===== 赞助商页面 ===== */
     .sponsor-wall {
       width: 100%;
       height: 100%;
@@ -302,6 +308,7 @@
       word-break: break-word;
     }
 
+    /* ===== 底部导航 HUD ===== */
     .hud-bottom {
       position: fixed;
       bottom: 0;
@@ -357,6 +364,7 @@
       text-align: center;
     }
 
+    /* ===== 详情弹窗 ===== */
     .modal {
       position: fixed;
       inset: 0;
@@ -480,6 +488,7 @@
       word-break: break-word;
     }
 
+    /* 🌟 金色成就获得者名字 */
     .info-item b#mWinner {
       color: var(--gold);
       font-weight: 700;
@@ -504,6 +513,7 @@
       font-size: 14px;
     }
 
+    /* ===== 手机端专属排版优化 ===== */
     @media (max-width: 768px) {
       .page-title {
         font-size: 26px;
@@ -562,15 +572,19 @@
 </head>
 <body>
 
+  <!-- ====== 顶部大标题 ====== -->
   <h1 class="page-title">518娱乐赛名人堂</h1>
 
+  <!-- ====== 主展柜区域 ====== -->
   <main class="showcase-container">
     <div class="showcase-frame">
 
+      <!-- ===== 第一页：荣誉殿堂 ===== -->
       <div class="page-view active" id="pageHonor">
         <div class="grid-wall" id="gridWall"></div>
       </div>
 
+      <!-- ===== 第二页：赞助商名单 ===== -->
       <div class="page-view" id="pageSponsor">
         <div class="sponsor-wall" id="sponsorWall"></div>
       </div>
@@ -578,12 +592,14 @@
     </div>
   </main>
 
+  <!-- ====== 底部导航 HUD ====== -->
   <footer class="hud-bottom">
     <div class="nav-btn" id="btnPrev" aria-label="上一页">&lt;</div>
     <div class="nav-title" id="navTitle">荣誉殿堂</div>
     <div class="nav-btn" id="btnNext" aria-label="下一页">&gt;</div>
   </footer>
 
+  <!-- ====== 成就详情弹窗 ====== -->
   <div class="modal" id="modal">
     <div class="modal-box">
       <div class="modal-close" id="btnClose">✕</div>
@@ -670,14 +686,14 @@
     ];
 
     // ============================================================
-    // 2. 赞助商数据（已修复第 5 个对象缺失的 {）
+    // 2. 赞助商数据
     // ============================================================
     const sponsors = [
       {
-        name: "白银无敌土拨鼠战神",
-        tag: "bin哥的雀魂粉丝",
-        icon: "🗑️",
-        desc: "为每位参赛选手赞助4.8元，woc，bin！"
+        name: "芝士一民",
+        tag: "518的好大哥",
+        icon: "🧀",
+        desc: "518最有实力的LOL玩家"
       },
       {
         name: "吃兔子的大米",
@@ -686,22 +702,40 @@
         desc: "希望你的股票一路长红"
       },
       {
+       name: "黑名单",
+        tag: "未被686承认的前任老公",
+        icon: "🔫",
+        desc: "我不会发言，只会当暖男"
+      },
+      {
+       name: "山山而川",
+        tag: "518散财王",
+        icon: "⛰️",
+        desc: "人如其名，老板大气"
+      },
+      {
+        name: "白银无敌土拨鼠战神",
+        tag: "bin哥的雀魂粉丝",
+        icon: "🗑️",
+        desc: "为每位参赛选手赞助4.8元，woc，bin！"
+      },
+      {
+       name: "泽泽的奇亚娜粉",
+        tag: "11月9日爆大天使之剑",
+        icon: "💿",
+        desc: "奇亚娜＞男刀"
+      },
+      {
+       name: "欧阳林硕学习粉",
+        tag: "157859的至尊V3之人",
+        icon: "👑",
+        desc: "可曾听闻一发30爆至尊的传说"
+      },
+      {
         name: "愿归鸿",
         tag: "一神神了",
         icon: "🌈",
         desc: "经常给大家分享爱看的"
-      },
-      {
-        name: "芝士一民",
-        tag: "518的好大哥",
-        icon: "🧀",
-        desc: "518最有实力的LOL玩家"
-      },
-      {
-        name: "黑名单",
-        tag: "未被承认686的前任老公",
-        icon: "🔫",
-        desc: "我不会发言，只会当暖男"
       },
     ];
 
@@ -731,11 +765,14 @@
       if (index < 0 || index >= PAGES.length) return;
       currentPage = index;
 
+      // 切换视图
       pageHonor.classList.toggle('active', PAGES[index].id === 'honor');
       pageSponsor.classList.toggle('active', PAGES[index].id === 'sponsor');
 
+      // 更新标题
       navTitle.textContent = PAGES[index].title;
 
+      // 更新按钮状态
       btnPrev.classList.toggle('disabled', index === 0);
       btnNext.classList.toggle('disabled', index === PAGES.length - 1);
     }
@@ -776,7 +813,7 @@
     }
 
     // ============================================================
-    // 7. 点击交互
+    // 7. 点击交互：已解锁 → 弹窗；未解锁 → 抖动
     // ============================================================
     gridWall.addEventListener('click', (e) => {
       const slot = e.target.closest('.slot');
